@@ -140,3 +140,129 @@ sub calculate_size_report {
 __PACKAGE__;
 
 __END__
+
+=pod
+
+=head1 NAME
+
+Devel::Events::Filter::Size - Add L<Devel::Size> info to event data.
+
+=head1 SYNOPSIS
+
+	my $f = Devel::Events::Filter::Size->new(
+		handler => $h,
+		fields => [qw/foo bar gorch/], # calculate the size of these fields
+	);
+
+	# OR
+
+	my $f = Devel::Events::Filter::Size->new(
+		handler => $h,
+		fields => "object", # just one field
+	);
+
+=head1 DESCRIPTION
+
+This class uses L<Devel::Size> and optionally L<Devel::Size::Report> to provide
+size information for data found inside events.
+
+Typical usage would be to apply it to the C<object> field in conjunction with
+L<Devel::Events::Objects>.
+
+=head1 ATTRIBUTES
+
+=over 4
+
+=item fields
+
+The fields whose size to check.
+
+Can be a single string, or an array reference.
+
+When undefined all fields will be computed.
+
+=item one_field
+
+This parameter controls the placement of the results (top level, or under the
+C<sizes> field).
+
+It defaults to true when C<fields> is a scalar, and false in any other
+situation.
+
+=item no_total
+
+When true, L<Devel::Size/total_size> will not be used.
+
+Defaults to false.
+
+=item no_report
+
+When true, L<Devel::Size::Report> will not be used.
+
+Defaults to true.
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item filter_event
+
+When C<is_one_field> returns a true value, this method will add a C<size>, and
+optionally a C<total_size> and C<size_report> field to the event. Otherwise it
+will add several of these to the C<sizes> field, keyed by the C<refaddr> of the
+value.
+
+Only reference types will have their sizes computed.
+
+=item is_one_field
+
+Internal method. Used by C<filter_event>
+
+=item get_field
+
+Returns the fields whose sizes need computing. This is either all fields if
+C<fields> is undef, or the specified fields.
+
+=item get_fields
+
+Returns only one field. Used when C<is_one_field> is true.
+
+=item calculate_sizes
+
+Return an entry with the C<size>, C<total_size> and C<size_report> results.
+
+=item calculate_size
+
+See L<Devel::Size/size>
+
+=item calculate_total_size
+
+Optionally uses L<Devel::Size/total_size>, depending on the value of
+C<no_total>.
+
+=item calculate_size_report
+
+Optionally loads L<Devel::Size::Report> and uses uses
+L<Devel::Size::Report/report_size>, depending on the value of C<no_report>.
+
+=back
+
+=head1 SEE ALSO
+
+L<Devel::Events>, L<Devel::Size>, L<Devel::Events::Filter>
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT & LICENSE
+
+	Copyright (c) 2007 Yuval Kogman. All rights reserved
+	This program is free software; you can redistribute it and/or modify it
+	under the terms of the MIT license or the same terms as Perl itself.
+
+=cut
+
+
