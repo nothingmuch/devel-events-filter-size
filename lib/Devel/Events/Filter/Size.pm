@@ -32,6 +32,7 @@ has no_total => (
 has no_report => (
 	isa => "Bool",
 	is  => "rw",
+	default => 1,
 );
 
 sub filter_event {
