@@ -59,7 +59,7 @@ sub filter_event {
 		}
 
 		foreach my $field ( @fields ) {
-			foreach my $ref ( @{ $fields{$field} ||=[] } ) {
+			foreach my $ref ( grep { ref } @{ $fields{$field} ||=[] } ) {
 				push @{ $sizes{$field} }, {
 					refaddr => refaddr($ref),
 					$self->calculate_sizes($ref)
