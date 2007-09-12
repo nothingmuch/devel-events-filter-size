@@ -13,7 +13,7 @@ WriteMakefile(
 	PREREQ_PM    => {
 		'Devel::Events'       => 0,
 		'Devel::Size'         => '0.69',
-		'Devel::Size::Report' => '0.11'
+		#'Devel::Size::Report' => '0.11'
 	},
 );
 
