@@ -11,6 +11,9 @@ WriteMakefile(
 	SIGN         => 1,
 	PL_FILES     => { },
 	PREREQ_PM    => {
+		'Devel::Events'       => 0,
+		'Devel::Size'         => '0.69',
+		'Devel::Size::Report' => '0.11'
 	},
 );
 
