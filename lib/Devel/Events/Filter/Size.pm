@@ -5,6 +5,8 @@ use Moose;
 
 with qw/Devel::Events::Filter/;
 
+our $VERSION = "0.01";
+
 use Devel::Size ();
 #use Devel::Size::Report (); # it breaks
 use Scalar::Util qw/refaddr reftype/;
