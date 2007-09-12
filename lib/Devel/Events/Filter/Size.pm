@@ -6,7 +6,7 @@ use Moose;
 with qw/Devel::Events::Filter/;
 
 use Devel::Size ();
-use Devel::Size::Report ();
+#use Devel::Size::Report (); # it breaks
 use Scalar::Util qw/refaddr reftype/;
 
 has fields => (
@@ -132,6 +132,7 @@ sub calculate_total_size {
 sub calculate_size_report {
 	my ( $self, $ref ) = @_;
 	return if $self->no_report;
+	require Devel::Size::Report; # only use it if necessary, since it breaks for some people.
 	return ( size_report => Devel::Size::Report::report_size($ref) );
 }
 
