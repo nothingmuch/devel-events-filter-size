@@ -5,7 +5,7 @@ use Moose;
 
 with qw/Devel::Events::Filter/;
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 use Devel::Size ();
 #use Devel::Size::Report (); # it breaks
